@@ -4,7 +4,7 @@ class UI{
     }
 
     createMainInfo(data){
-        console.log(data);
+        // console.log(data);
         this.divCard.innerHTML =  `
             <div class="container container-card">
                 <h1 class="card-title">${data.city}, ${data.country}</h1>
@@ -31,7 +31,7 @@ class UI{
     }
 
     createAddInfo(data){
-        console.log(data);
+        // console.log(data);
         const ul = document.querySelector('.list-group');
         ul.innerHTML = `
             <li class="">Fells Like: ${data.feels}&deg;C</li>

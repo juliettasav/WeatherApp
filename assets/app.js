@@ -1,5 +1,6 @@
 const get_loc = new getLocation;
 const api = new API;
+const searchCity = new GetCity;
 const ui = new UI;
 
 // Converting degrees into wind name
@@ -59,4 +60,35 @@ get_loc.getCurrentLocation((lat, lon) => {
 
         })
         .catch(err => err);
+})
+
+
+
+document.querySelector('.card-body').addEventListener('click', (e) => {
+    if(e.target.classList.contains('btn')) {
+        showModal(); 
+    }      
+})
+
+function showModal(){
+    console.log(2);
+    const wrap = document.querySelector('#wrapper');
+    wrap.className = wrap.className !== 'show' ? 'show' : 'hide';
+    
+
+
+    
+    
+}
+
+document.querySelector('.form-control-sm').addEventListener('keyup', (e) => {
+    const cityName = e.target.value;
+    
+        searchCity.getAllCities()
+            .then(data => {
+                const cityArray = data.map(item => item.name);
+                console.log(cityArray);
+            })
+
+
 })
