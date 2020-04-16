@@ -1,4 +1,4 @@
-class BYLOCATION {
+class GETAPI {
     constructor(){
         this.api_key = '7ea9ef21b0e5ffdb85b88fc865589f80'
     }
@@ -10,7 +10,6 @@ class BYLOCATION {
     }
 
     getPositionByCity(city){
-        console.log(city);
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.api_key}
         `;
         return fetch(url)

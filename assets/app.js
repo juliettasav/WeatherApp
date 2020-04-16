@@ -1,6 +1,6 @@
 const get_loc = new getLocation;
-const api = new BYLOCATION;
-const searchCity = new GetCity;
+const api = new GETAPI;
+const searchCity = new GETCITIES;
 const ui = new UI;
 
 // Converting degrees into wind name
@@ -79,7 +79,12 @@ document.querySelector('#wrapper').addEventListener('click', (e) => {
 
 function showHideModal(){
     const wrap = document.querySelector('#wrapper');
-    wrap.className = wrap.className !== 'show' ? 'show' : 'hide';
+    if(wrap.className === 'hide'){
+        wrap.className = 'show'
+    } else {
+        wrap.className = 'hide'
+    }
+    
 }
 
 
@@ -185,7 +190,8 @@ function autocomplete(inp, arr) {
 
   }
 
-if(document.querySelector('#wrapper').classList.contains('show')) {
+if(document.querySelector('input')) {
+
     searchCity.getAllCities()
             .then(data => {
                 const cityArray = data.map(item => item.name);
@@ -196,7 +202,9 @@ if(document.querySelector('#wrapper').classList.contains('show')) {
             })
     document.querySelector('.btn-save').addEventListener('click', () => {
         const choosenCity = document.querySelector('input').value;
-        api.getPositionByCity(choosenCity)
+
+        if(choosenCity !== '') {
+            api.getPositionByCity(choosenCity)
             .then(result => {
                 ui.createMainInfo({
                     city: result.name,
@@ -215,6 +223,9 @@ if(document.querySelector('#wrapper').classList.contains('show')) {
             })
             .catch(err => err);
             showHideModal();
+        } else {
+            ui.showAlert('Please, select a city');
+        }  
         
     })
 }

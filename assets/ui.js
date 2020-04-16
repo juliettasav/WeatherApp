@@ -40,5 +40,17 @@ class UI{
         `
         
     }
+
+    showAlert(massage) {
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-dismissible alert-danger';
+        alert.appendChild(document.createTextNode(massage));
+        const parent = document.querySelector('.modal-body');
+        const beforeChild = document.querySelector('.form-group.autocomplete');
+        parent.insertBefore(alert, beforeChild);
+        setTimeout(() => {
+            alert.remove();
+        }, 2000)
+    }
 }
 

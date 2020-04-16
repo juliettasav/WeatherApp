@@ -1,4 +1,4 @@
-class GetCity {
+class GETCITIES {
     constructor() {
         this.api_key = ''
     }
