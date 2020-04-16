@@ -1,5 +1,5 @@
 const get_loc = new getLocation;
-const api = new API;
+const api = new BYLOCATION;
 const searchCity = new GetCity;
 const ui = new UI;
 
@@ -122,7 +122,6 @@ function autocomplete(inp, arr) {
             a.appendChild(b);
           }
         }
-        console.log(inp.value);
         
     });
     /*execute a function presses a key on the keyboard:*/
@@ -184,7 +183,6 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
 
-  console.log(inp.value);
   }
 
 if(document.querySelector('#wrapper').classList.contains('show')) {
@@ -196,5 +194,27 @@ if(document.querySelector('#wrapper').classList.contains('show')) {
             .then(data => {
                 autocomplete(document.querySelector('input'), data);
             })
-    
+    document.querySelector('.btn-save').addEventListener('click', () => {
+        const choosenCity = document.querySelector('input').value;
+        api.getPositionByCity(choosenCity)
+            .then(result => {
+                ui.createMainInfo({
+                    city: result.name,
+                    country: result.sys.country,
+                    temp: (result.main.temp - 273).toFixed(),
+                    weather: result.weather[0].description,
+                    icon: result.weather[0].icon,
+                });
+                ui.createAddInfo({
+                    humidity: result.main.humidity,
+                    feels: (result.main.feels_like - 273).toFixed(),
+                    wind_deg: degToCard(result.wind.deg),
+                    wind_speed: result.wind.speed
+                });
+
+            })
+            .catch(err => err);
+            showHideModal();
+        
+    })
 }
