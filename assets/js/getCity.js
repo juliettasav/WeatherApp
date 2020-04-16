@@ -4,7 +4,7 @@ class GETCITIES {
     }
 
     async getAllCities(){
-        const response = await fetch('./assets/cities.json');
+        const response = await fetch('./assets/json/cities.json');
         const data = await response.json();
         return data;
     }
